@@ -25,10 +25,16 @@ class DatabaseSeeder extends Seeder
 		//     'name' => 'Test User',
 		//     'email' => 'test@example.com',
 		// ]);
+		// Product::factory()->count(50);
+		Category::factory()->count(10)->hasProducts(5)->create();
+		User::factory()->count(5)->hasAddress(1)->create();
 
-		Product::factory()->count(3)->hasCategories()->create();
-		User::factory()->count(3)->hasAddress()->create();
-		Category::factory()->count(3)->hasProducts()->create();
-		// Comment::factory()->create();
+		for ($i = 0; $i < 50; $i++)
+		{
+			Comment::factory()->state([
+				'product_id'=> rand(1, 50),
+				'user_id'   => rand(1, 5),
+			])->create();
+		}
 	}
 }
