@@ -19,21 +19,14 @@ class DatabaseSeeder extends Seeder
 	 */
 	public function run()
 	{
-		// \App\Models\User::factory(10)->create();
-
-		// \App\Models\User::factory()->create([
-		//     'name' => 'Test User',
-		//     'email' => 'test@example.com',
-		// ]);
-		// Product::factory()->count(50);
 		Category::factory()->count(10)->hasProducts(5)->create();
-		User::factory()->count(5)->hasAddress(1)->create();
+		User::factory()->count(5)->hasAddress()->create();
 
-		for ($i = 0; $i < 50; $i++)
+		for ($i = 0; $i < Product::count(); $i++)
 		{
 			Comment::factory()->state([
-				'product_id'=> rand(1, 50),
-				'user_id'   => rand(1, 5),
+				'product_id'=> rand(1, Product::count()),
+				'user_id'   => rand(1, User::count()),
 			])->create();
 		}
 	}
