@@ -19,10 +19,12 @@ class DatabaseSeeder extends Seeder
 	 */
 	public function run()
 	{
+		$NUMBER_OF_COMMENTS = 50;
+
 		Category::factory()->count(10)->hasProducts(5)->create();
 		User::factory()->count(5)->hasAddress()->create();
 
-		for ($i = 0; $i < Product::count(); $i++)
+		for ($i = 0; $i < $NUMBER_OF_COMMENTS; $i++)
 		{
 			Comment::factory()->state([
 				'product_id'=> rand(1, Product::count()),
