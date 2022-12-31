@@ -18,5 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['controller' => UserController::class], function () {
 	Route::get('/users', 'index')->name('users.index');
 	Route::get('/users/{user}', 'get')->name('users.get');
+	Route::post('/users', 'store')->name('users.store');
+	Route::put('/users/{user}', 'update')->name('posts.update');
 	Route::delete('/users/{user}', 'destroy')->name('user.destroy');
 });
