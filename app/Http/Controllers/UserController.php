@@ -19,6 +19,14 @@ class UserController extends Controller
 		return response()->json(['user'=>$user], 200);
 	}
 
+	// public function address($id)
+	// {
+	// 	$address = User::find($id)->address;
+
+	// 	return response()->json(['address' => $address], 200);
+	// }
+	// --> retrieve individual user and address like: "user": {*users info* & *address*}
+
 	public function store(StoreUserRequest $request): JsonResponse
 	{
 		$user = User::create([
