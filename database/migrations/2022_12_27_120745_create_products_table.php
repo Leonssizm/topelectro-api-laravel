@@ -17,8 +17,7 @@ return new class extends Migration {
 			$table->string('name');
 			$table->decimal('price');
 			$table->decimal('wholesale_price');
-			$table->string('sq');
-			// sq should be unique! (unique() was deleted for seeding purposes)
+			$table->string('sq')->unique();
 			$table->string('color');
 			$table->text('details');
 			$table->string('picture');
