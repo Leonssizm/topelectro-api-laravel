@@ -20,28 +20,20 @@ class CategoryController extends Controller
 
 	public function store(StoreCategoryRequest $request): JsonResponse
 	{
-		$category = Category::create([
-			'name'       => $request->name,
-			'description'=> $request->description,
-		]);
+		$category = Category::create($request->validated());
 
 		return response()->json($category, 201);
 	}
 
-	public function update(StoreCategoryRequest $request, Category $category)
+	public function update(StoreCategoryRequest $request, Category $category): JsonResponse
 	{
-		$category->update([
-			'name'       => $request->name,
-			'description'=> $request->description,
-		]);
+		$category->update($request->validated());
 		return response()->json(status: 204);
 	}
 
 	public function destroy(Category $category): JsonResponse
 	{
-		$category->products()->detach();
 		$category->delete();
-
 		return response()->json(status:204);
 	}
 }
