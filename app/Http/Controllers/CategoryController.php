@@ -10,23 +10,22 @@ class CategoryController extends Controller
 {
 	public function index(): JsonResponse
 	{
-		return response()->json(['categories'=>Category::all()], 200);
+		return response()->json(Category::all(), 200);
 	}
 
 	public function get(Category $category): JsonResponse
 	{
-		return response()->json(['category' => $category], 200);
+		return response()->json($category, 200);
 	}
 
 	public function store(StoreCategoryRequest $request): JsonResponse
 	{
 		$category = Category::create([
-			'id'         => $request->id,
 			'name'       => $request->name,
 			'description'=> $request->description,
-		])->create();
+		]);
 
-		return response()->json(['category'=>$category], 201);
+		return response()->json($category, 201);
 	}
 
 	public function update(StoreCategoryRequest $request, Category $category)
@@ -46,6 +45,3 @@ class CategoryController extends Controller
 		return response()->json(status:204);
 	}
 }
-// TODO:
-// store,
-// update,
