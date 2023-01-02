@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(CategoryController::class)->group(function () {
 	Route::get('/categories', 'index')->name('categories.index');
 	Route::get('/categories/{category}', 'get')->name('categories.get');
-
+	Route::post('/categories', 'store')->name('categories.store');
+	Route::put('/categories/{category}', 'update')->name('categories.update');
 	Route::delete('/categories/{category}', 'destroy')->name('categories.destroy');
 });
