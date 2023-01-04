@@ -6,7 +6,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -38,18 +38,18 @@ class ProductController extends Controller
 	{
 		if ($request->hasFile('picture'))
 		{
-			Storage::delete($product->picture);
-			$product->picture = $request->picture;
+			File::delete('storage/' . $product->picture);
+			$product->picture = $this->storeImage($request);
 		}
 		$product->update($request->validated() + [
-			'picture' => $product->picture,
+			'picture' => $request->picture,
 		]);
 		return response()->json(status: 204);
 	}
 
 	public function destroy(Product $product): JsonResponse
 	{
-		Storage::delete($product->picture);
+		File::delete('storage/' . $product->picture);
 		$product->delete();
 
 		return response()->json(status: 204);
