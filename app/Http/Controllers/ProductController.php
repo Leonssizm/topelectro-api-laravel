@@ -39,7 +39,7 @@ class ProductController extends Controller
 		if ($request->hasFile('picture'))
 		{
 			Storage::delete($product->picture);
-			$product->picture = $this->storeImage($request);
+			$product->picture = $request->picture;
 		}
 		$product->update($request->validated() + [
 			'picture' => $product->picture,
@@ -57,7 +57,8 @@ class ProductController extends Controller
 
 	private function storeImage($request)
 	{
-		$newImage = uniqid() . '-' . $request->name . '.' . $request->picture->extension();
-		return $request->picture->move(storage_path('app/public'), $newImage);
+		$storedImage = uniqid() . '-' . $request->name . '.' . $request->picture->extension();
+		$request->picture->move('storage', $storedImage);
+		return $storedImage;
 	}
 }
