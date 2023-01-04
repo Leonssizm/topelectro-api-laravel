@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -32,14 +34,22 @@ class ProductController extends Controller
 		return response()->json($product, 201);
 	}
 
-	public function update(StoreProductRequest $request, Product $product)
+	public function update(UpdateProductRequest $request, Product $product): JsonResponse
 	{
-		$product->update($request->validated());
+		if ($request->hasFile('picture'))
+		{
+			Storage::delete($product->picture);
+			$product->picture = $this->storeImage($request);
+		}
+		$product->update($request->validated() + [
+			'picture' => $product->picture,
+		]);
 		return response()->json(status: 204);
 	}
 
 	public function destroy(Product $product): JsonResponse
 	{
+		Storage::delete($product->picture);
 		$product->delete();
 
 		return response()->json(status: 204);
