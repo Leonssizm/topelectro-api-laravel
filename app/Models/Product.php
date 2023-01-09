@@ -11,9 +11,11 @@ class Product extends Model
 
 	protected $guarded = ['id'];
 
+	protected $with = ['categories'];
+
 	public function categories()
 	{
-		return $this->belongsToMany(Category::class);
+		return $this->belongsToMany(Category::class)->withPivot('product_id');
 	}
 
 	public function comments()
