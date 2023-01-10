@@ -15,7 +15,7 @@ class Product extends Model
 
 	public function categories()
 	{
-		return $this->belongsToMany(Category::class)->withPivot('product_id');
+		return $this->belongsToMany(Category::class);
 	}
 
 	public function comments()

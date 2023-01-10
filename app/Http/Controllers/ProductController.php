@@ -31,6 +31,9 @@ class ProductController extends Controller
 			'details'        => $request->details,
 			'picture'        => $this->storeImage($request),
 		]);
+
+		$product->categories()->attach($request->category_ids);
+		$product->load('categories');
 		return response()->json($product, 201);
 	}
 
@@ -44,6 +47,8 @@ class ProductController extends Controller
 		$product->update($request->validated() + [
 			'picture' => $request->picture,
 		]);
+		$product->categories()->sync($request->category_ids);
+
 		return response()->json(status: 204);
 	}
 

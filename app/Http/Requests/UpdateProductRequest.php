@@ -19,10 +19,11 @@ class UpdateProductRequest extends FormRequest
 		return [
 			'name'           => 'required|alpha_num',
 			'price'          => 'required|decimal:2,4',
-			'wholesale_price'=> 'decimal:2,4',
+			'wholesale_price'=> 'required|decimal:2,4',
 			'sq'             => 'required',
 			'color'          => 'required',
 			'details'        => 'required',
+			'category_ids'   => 'required|array|min:1',
 		];
 	}
 }
