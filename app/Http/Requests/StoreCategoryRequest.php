@@ -19,7 +19,7 @@ class StoreCategoryRequest extends FormRequest
 	{
 		return [
 			'name'       => 'required',
-			'description'=> 'required|alpha_num',
+			'description'=> 'required',
 		];
 	}
 }
