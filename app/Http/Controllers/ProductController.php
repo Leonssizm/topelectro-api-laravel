@@ -39,6 +39,7 @@ class ProductController extends Controller
 
 	public function update(UpdateProductRequest $request, Product $product): JsonResponse
 	{
+		return response()->json($request->all());
 		if ($request->hasFile('picture'))
 		{
 			File::delete('storage/' . $product->picture);
@@ -49,7 +50,8 @@ class ProductController extends Controller
 		]);
 		$product->categories()->sync($request->category_ids);
 
-		return response()->json(status: 204);
+		// return response()->json(status: 204);
+		return 'TITO';
 	}
 
 	public function destroy(Product $product): JsonResponse

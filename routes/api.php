@@ -29,4 +29,8 @@ Route::controller(ProductController::class)->group(function () {
 	Route::post('/products', 'store')->name('products.store');
 	Route::put('/products/{product}', 'update')->name('products.update');
 	Route::delete('/products/{product}', 'destroy')->name('products.destroy');
+
+	// Route::put('/products/{product}', function () {
+	// 	return 'tito';
+	// })->name('products.update');
 });
