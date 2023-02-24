@@ -44,12 +44,14 @@ class ProductController extends Controller
 			File::delete('storage/' . $product->picture);
 			$product->picture = $this->storeImage($request);
 		}
+
 		$product->update($request->validated() + [
 			'picture' => $request->picture,
 		]);
+
 		$product->categories()->sync($request->category_ids);
 
-		return response()->json(status: 204);
+		return response()->json($product);
 	}
 
 	public function destroy(Product $product): JsonResponse
