@@ -42,7 +42,7 @@ class ProductController extends Controller
 		if ($request->hasFile('picture'))
 		{
 			File::delete('storage/' . $product->picture);
-			$product->picture = $this->storeImage($request);
+			$request->picture = $this->storeImage($request);
 		}
 
 		$product->update($request->validated() + [
